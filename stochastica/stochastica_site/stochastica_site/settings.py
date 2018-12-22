@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'presentation.apps.PresentationConfig',
 ]
 
 MIDDLEWARE = [
@@ -111,7 +112,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = True # DanB 12/21/2018: Should we set this to false?
 
 
 # Static files (CSS, JavaScript, Images)
