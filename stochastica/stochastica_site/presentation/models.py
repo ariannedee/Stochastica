@@ -35,4 +35,5 @@ class ImageView(models.Model):
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
     viewed_at = models.DateTimeField()
 
+
 # Do we need to add attributes to the User class here? i.e. number of games played
