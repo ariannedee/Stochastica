@@ -4,16 +4,16 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Image(models.Model):
     image_url = models.ImageField(max_length=300) # limits URLs to 300 chars
-    created_at = models.DateTimeField()
-    modified_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField()
     deleted = models.BooleanField()
 
 class Pack(models.Model):
     name = models.CharField('pack name', max_length=200) # optional field, for example, 'Starter Pack'
     size = models.IntegerField(default=100)
-    created_at = models.DateTimeField()
-    modified_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField()
     deleted = models.BooleanField()
 
@@ -21,16 +21,16 @@ class PackContents(models.Model):
     pack = models.ForeignKey(Pack, on_delete=models.CASCADE)
     image = models.ForeignKey(Image, on_delete=models.PROTECT)
         # This means each image can only be assigned to one pack, which I think is desired
-    created_at = models.DateTimeField()
-    modified_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField()
     deleted = models.BooleanField()
 
 class SubscribedTo(models.Model):
     user = models.ManyToManyField(User)
     pack = models.ManyToManyField(Pack)
-    created_at = models.DateTimeField()
-    modified_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField()
     deleted = models.BooleanField()
 
