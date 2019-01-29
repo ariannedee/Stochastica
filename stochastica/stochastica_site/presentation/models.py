@@ -7,6 +7,7 @@ class Image(models.Model):
     created_at = models.DateTimeField()
     modified_at = models.DateTimeField()
     deleted_at = models.DateTimeField()
+    deleted = models.BooleanField()
 
 class Pack(models.Model):
     name = models.CharField('pack name', max_length=200) # optional field, for example, 'Starter Pack'
@@ -14,6 +15,7 @@ class Pack(models.Model):
     created_at = models.DateTimeField()
     modified_at = models.DateTimeField()
     deleted_at = models.DateTimeField()
+    deleted = models.BooleanField()
 
 class PackContents(models.Model):
     pack = models.ForeignKey(Pack, on_delete=models.CASCADE)
@@ -22,6 +24,7 @@ class PackContents(models.Model):
     created_at = models.DateTimeField()
     modified_at = models.DateTimeField()
     deleted_at = models.DateTimeField()
+    deleted = models.BooleanField()
 
 class SubscribedTo(models.Model):
     user = models.ManyToManyField(User)
@@ -29,6 +32,7 @@ class SubscribedTo(models.Model):
     created_at = models.DateTimeField()
     modified_at = models.DateTimeField()
     deleted_at = models.DateTimeField()
+    deleted = models.BooleanField()
 
 class ImageView(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
