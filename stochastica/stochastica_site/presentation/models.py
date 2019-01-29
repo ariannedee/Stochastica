@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Image(models.Model):
-    # Can replace this with an ImageFIeld and then this referneces either a nework location or some other file storage in the cloud
     image_url = models.ImageField(max_length=300) # limits URLs to 300 chars
     created_at = models.DateTimeField()
     modified_at = models.DateTimeField()
