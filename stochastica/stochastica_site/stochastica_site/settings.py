@@ -115,7 +115,14 @@ USE_L10N = True
 USE_TZ = True # DanB 12/21/2018: Should we set this to false?
 
 
+ENV_PATH = os.path.abspath(os.path.dirname(__file__)) + '/..'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(ENV_PATH, 'static/')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(ENV_PATH, 'media/')
