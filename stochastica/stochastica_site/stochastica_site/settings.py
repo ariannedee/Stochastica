@@ -125,5 +125,3 @@ STATIC_ROOT = os.path.join(ENV_PATH, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(ENV_PATH, 'media')
-
-#TEST
