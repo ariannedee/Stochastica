@@ -17,7 +17,7 @@ class Pack(models.Model):
 
 class Image(models.Model):
     title = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='pack_images', max_length=300)
+    image = models.ImageField(max_length=300)
     pack = models.ForeignKey(Pack, related_name='images', on_delete=models.SET_NULL, blank=True, null=True)
     viewed_by = models.ManyToManyField(User, related_name='images_viewed')
     created_at = models.DateTimeField(auto_now_add=True)
