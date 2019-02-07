@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 sqlalchemy = "*"
 django = "*"
-sqlite3 = "*"
 pillow = "*"
 
 [dev-packages]
