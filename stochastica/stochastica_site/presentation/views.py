@@ -1,6 +1,10 @@
+from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render
-from django.http import HttpResponse
+
 
 # Create your views here.
 def index(request):
-    return HttpResponse('Hello world! at the poll index.')
+    if request.user == AnonymousUser:
+        return render(request, 'not_logged_in.html')
+    image = request.user.subscribed_to.first().images.first()
+    return render(request, 'index.html', context={'image': image.image.url})
