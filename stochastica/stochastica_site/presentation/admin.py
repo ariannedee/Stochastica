@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db.models import Sum
 from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.html import format_html
@@ -48,5 +49,13 @@ class PackAdmin(admin.ModelAdmin):
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     exclude = ('deleted_at',)
-    fields = ['title', 'image', 'pack', get_image_preview]
-    readonly_fields = [get_image_preview]
+    fields = ['title', 'image', 'pack', get_image_preview, 'get_views']
+    readonly_fields = [get_image_preview, 'get_views']
+
+    def get_views(self, obj=None):
+        if obj is None:
+            return 0
+        return obj.views.aggregate(Sum('count'))['count__sum']
+
+    get_views.short_description = "Number of views"
+

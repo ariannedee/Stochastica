@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render, redirect
+from .models import get_next_image
 
 
 def index(request):
@@ -11,5 +12,6 @@ def index(request):
 def game(request):
     if not request.user.is_authenticated:
         return redirect('/')
-    image = request.user.subscribed_to.first().images.first()
+
+    image = get_next_image(request.user)
     return render(request, 'presentation/index.html', context={'image': image.image.url})

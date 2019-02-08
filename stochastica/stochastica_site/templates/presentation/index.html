@@ -3,5 +3,7 @@
 {% block title %}Stochastica - game{% endblock %}
 
 {% block content %}
-<img src="{{ image }}">
+<a href="{% url 'play' %}">
+  <img src="{{ image }}">
+</a>
 {% endblock %}

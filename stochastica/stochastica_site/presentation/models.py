@@ -28,9 +28,14 @@ class Image(models.Model):
     def __str__(self):
         return self.title
 
+    def view(self, user):
+        view, created = self.views.get_or_create(user=user)
+        view.save()
+        view.view()
+
 
 class ImageView(models.Model):
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='views')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     viewed_at = models.DateTimeField(auto_now=True)
     count = models.IntegerField(default=0)
@@ -38,6 +43,17 @@ class ImageView(models.Model):
     def __str__(self):
         return f'{self.user.name}, {self.image.title}'
 
+    def view(self):
+        self.count += 1
+        self.save()
+
+
+def get_next_image(user):
+    import random
+    images = user.subscribed_to.first().images.all()
+    image = images[random.randint(0, images.count() - 1)]
+    image.view(user)
+    return image
 
 
 # Do we need to add attributes to the User class here? i.e. number of games played
