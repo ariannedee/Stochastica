@@ -55,7 +55,9 @@ ROOT_URLCONF = 'stochastica_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,6 +102,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -121,7 +126,7 @@ ENV_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.pardir)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(ENV_PATH, 'static')
+STATIC_ROOT = os.path.join(ENV_PATH, 'static/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(ENV_PATH, 'media')

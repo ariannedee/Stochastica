@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+main {
+  margin: 20px 30px;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #EEE;
+}
+
+nav * {
+  margin: 10px;
+}
