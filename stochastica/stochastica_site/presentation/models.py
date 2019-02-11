@@ -60,7 +60,7 @@ def get_next_image(user):
 def bulk_add_images():
     from django.core.files import File
     from django.core.files.temp import NamedTemporaryFile
-    import urllib2
+    import urllib3
     from pathlib import Path
 
     home = str(Path.home())
@@ -70,14 +70,16 @@ def bulk_add_images():
     print(home)
 
     imgs = file.read_text().split('\n')
+    http = urllib3.PoolManager()
 
     for i in imgs:
         if Image.objects.filter(title=i):
             pass
         else:
-            content = NamedTemporaryFile(delete=True)
-            content.write(urllib2.urlopen(i).read())
+            content = NamedTemporaryFile()
+            content.write(http.request('GET', i).data)
             content.flush()
-            i_add = Image(title=i, image=content)
+            i_add = Image(title=i, image=File(content))
             i_add.save()
+            print("Breaking after first attempted add - remove break once working ")
             break
