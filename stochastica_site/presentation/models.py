@@ -54,32 +54,3 @@ def get_next_image(user):
     image = images[random.randint(0, images.count() - 1)]
     image.view(user)
     return image
-
-
-# Do we need to add attributes to the User class here? i.e. number of games played
-def bulk_add_images():
-    from django.core.files import File
-    from django.core.files.temp import NamedTemporaryFile
-    import urllib3
-    from pathlib import Path
-
-    home = str(Path.home())
-    path = Path('Stochastica/stochastica/')
-    file = home / path / 'links list.csv'
-
-    print(home)
-
-    imgs = file.read_text().split('\n')
-    http = urllib3.PoolManager()
-
-    for i in imgs:
-        if Image.objects.filter(title=i):
-            pass
-        else:
-            content = NamedTemporaryFile()
-            content.write(http.request('GET', i).data)
-            content.flush()
-            i_add = Image(title=i, image=File(content))
-            i_add.save()
-            print("Breaking after first attempted add - remove break once working ")
-            break

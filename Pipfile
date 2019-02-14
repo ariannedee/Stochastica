@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 sqlalchemy = "*"
-django = "*"
+django = "==2.1.7"
 pillow = "*"
 urllib3 = "*"
 
