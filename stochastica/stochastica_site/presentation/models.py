@@ -59,7 +59,7 @@ def get_next_image(user):
 # Do we need to add attributes to the User class here? i.e. number of games played
 def bulk_add_images():
     from django.core.files import File
-    from django.core.files.temp import NamedTemporaryFile
+    from django.core.files.base import ContentFile
     import urllib3
     from pathlib import Path
 
@@ -74,11 +74,11 @@ def bulk_add_images():
 
     for i in imgs:
         if Image.objects.filter(title=i):
+            # Skip any image if we have the name i already in the database
             pass
         else:
-            content = NamedTemporaryFile()
-            content.write(http.request('GET', i).data)
-            content.flush()
+            img_data = http.request('GET', i).data
+            content = ContentFile(img_data)
             i_add = Image(title=i, image=File(content))
             i_add.save()
             print("Breaking after first attempted add - remove break once working ")
