@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'presentation/css/style.css' %}">
   </head>
   <body>
-    <nav>
+    {% block nav_tag %}<nav>{% endblock %}
       <div>
         <a href="{% url 'index' %}">Home</a>
       </div>

@@ -1,5 +1,4 @@
 *.pyc
 *.*~
 .idea
-*.sqlite3
-media/
+/stochastica_site/static/

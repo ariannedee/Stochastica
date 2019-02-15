@@ -41,7 +41,7 @@ class ImageView(models.Model):
     count = models.IntegerField(default=0)
 
     def __str__(self):
-        return f'{self.user.name}, {self.image.title}'
+        return f'{self.user.username}: {self.image.title}'
 
     def view(self):
         self.count += 1
@@ -50,7 +50,8 @@ class ImageView(models.Model):
 
 def get_next_image(user):
     import random
-    images = user.subscribed_to.first().images.all()
-    image = images[random.randint(0, images.count() - 1)]
+    images = Image.objects.filter(pack__subscribers=user)
+    images = images.order_by('views__viewed_at').all()
+    image = images[random.randint(0, min(10, images.count() - 1))]
     image.view(user)
     return image

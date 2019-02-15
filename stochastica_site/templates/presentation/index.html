@@ -2,8 +2,12 @@
 
 {% block title %}Stochastica - game{% endblock %}
 
+{% block nav_tag %}<nav class="hidden">{% endblock %}
+
 {% block content %}
 <a href="{% url 'play' %}">
-  <img src="{{ image }}">
+  <div class="slide" style='background-image: url("{{ image }}")'>
+
+  </div>
 </a>
 {% endblock %}
