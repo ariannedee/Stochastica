@@ -10,6 +10,8 @@ pillow = "*"
 urllib3 = "*"
 
 [dev-packages]
+django-extensions = "*"
+werkzeug = "*"
 
 [requires]
 python_version = "3.7"
