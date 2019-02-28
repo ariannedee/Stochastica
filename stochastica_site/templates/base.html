@@ -5,6 +5,7 @@
     <title>{% block title %}Stochastica{% endblock %}</title>
     {% load i18n static %}
     <link rel="stylesheet" type="text/css" href="{% static 'presentation/css/style.css' %}">
+    <script src="{% static 'presentation/js/jquery-3.3.1.min.js' %}"></script>
   </head>
   <body>
     {% block nav_tag %}<nav>{% endblock %}
@@ -25,5 +26,6 @@
       {% block content %}
       {% endblock %}
     </main>
+    {% block script %}{% endblock %}
   </body>
 </html>

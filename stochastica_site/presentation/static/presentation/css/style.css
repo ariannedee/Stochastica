@@ -14,11 +14,11 @@ nav {
   background-color: #EEE;
 }
 
-nav.hidden {
+.hidden {
   opacity: 0;
 }
 
-nav.hidden:hover {
+.hidden:hover {
   opacity: 0.7;
 }
 
@@ -40,4 +40,22 @@ nav * {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+a#back {
+  position: absolute;
+  color: #555;
+  text-decoration: none;
+  font-size: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+a#back {
+  left: 0;
+}
+
+a#back div {
+  padding: 20px;
+  background: #DDD;
 }

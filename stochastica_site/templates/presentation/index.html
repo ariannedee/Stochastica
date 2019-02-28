@@ -2,12 +2,21 @@
 
 {% block title %}Stochastica - game{% endblock %}
 
+{% load i18n static %}
+{% block script %}
+    <script src="{% static 'presentation/js/index.js' %}"></script>
+{% endblock %}
+
 {% block nav_tag %}<nav class="hidden">{% endblock %}
 
 {% block content %}
-<a href="{% url 'play' %}">
+<a id="next" href="{% url 'slide' %}?index={{ next }}">
   <div class="slide" style='background-image: url("{{ image }}")'>
-
+  </div>
+</a>
+<a id="back" class="hidden" href="{% url 'slide' %}?index={{ prev }}">
+  <div>
+    <p><</p>
   </div>
 </a>
 {% endblock %}

@@ -55,3 +55,10 @@ def get_next_image(user):
     image = images[random.randint(0, min(10, images.count() - 1))]
     image.view(user)
     return image
+
+
+def get_image_at_index(user, index):
+    images = Image.objects.filter(pack__subscribers=user)
+    images = images.order_by('-views__viewed_at').all()
+    image = images[abs(index)]
+    return image
