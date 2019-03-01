@@ -47,16 +47,33 @@ class PackAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
 
 
+def delete_views(modelAdmin, request, queryset):
+    for image in queryset:
+        image.views.all().delete()
+
+
+delete_views.short_description = 'Delete image views'
+
+
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     exclude = ('deleted_at',)
     fields = ['title', 'image', 'pack', get_image_preview, 'get_views']
     readonly_fields = [get_image_preview, 'get_views']
+    list_display = ('pk', '__str__', 'get_views', 'last_viewed')
+    actions = [delete_views, ]
+
+    def last_viewed(self, obj=None):
+        if obj is None:
+            return
+        last_view = obj.views.order_by('-viewed_at').first()
+        if last_view:
+            return last_view.viewed_at
 
     def get_views(self, obj=None):
         if obj is None:
             return 0
-        return obj.views.aggregate(Sum('count'))['count__sum']
+        return obj.views.aggregate(Sum('count'))['count__sum'] or 0
 
     get_views.short_description = "Number of views"
 

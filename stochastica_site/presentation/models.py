@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Q, Case, When, DateTimeField, F
 
 
 class Pack(models.Model):
@@ -50,9 +51,18 @@ class ImageView(models.Model):
 
 def get_next_image(user):
     import random
-    images = Image.objects.filter(pack__subscribers=user)
-    images = images.order_by('views__viewed_at').all()
-    image = images[random.randint(0, min(10, images.count() - 1))]
+    all_images = Image.objects.filter(pack__subscribers=user)
+    # Order by the last time this user saw this image, with unseen images at the top
+    all_images = all_images.annotate(
+        last_seen_at=Case(
+            When(views__user=user, then=F('views__viewed_at')),
+            default=None,
+            output_field=DateTimeField()
+        )).order_by('last_seen_at')
+    num_unseen_images = all_images.filter(last_seen_at__isnull=True).count()
+    upper_limit = max(num_unseen_images, 20)
+    upper_limit = min(upper_limit, all_images.count() - 1)  # In case there are < 20 images
+    image = all_images[random.randint(0, upper_limit)]
     image.view(user)
     return image
 
