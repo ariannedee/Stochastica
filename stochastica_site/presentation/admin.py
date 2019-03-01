@@ -42,6 +42,7 @@ class ImageInline(admin.StackedInline):
 
 @admin.register(Pack)
 class PackAdmin(admin.ModelAdmin):
+    save_on_top = True
     exclude = ('deleted_at',)
     inlines = [ImageInline]
 

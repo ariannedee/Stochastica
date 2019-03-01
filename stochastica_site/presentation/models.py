@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Pack(models.Model):
     name = models.CharField(max_length=200)
     size = models.IntegerField(default=100)
-    subscribers = models.ManyToManyField(User, related_name='subscribed_to')
+    subscribers = models.ManyToManyField(User, related_name='subscribed_to', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
