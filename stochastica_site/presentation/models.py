@@ -57,8 +57,12 @@ def get_next_image(user):
     return image
 
 
+# Takes a negative or 0 index to get previously viewed images
 def get_image_at_index(user, index):
     images = Image.objects.filter(pack__subscribers=user)
+    # Since QuerySets don't support negative indexing
+    # we reverse the order and index by the absolute value
     images = images.order_by('-views__viewed_at').all()
-    image = images[abs(index)]
+    max_index = images.count() - 1
+    image = images[min(abs(index), max_index)]
     return image
