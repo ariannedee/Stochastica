@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+main {
+  margin: 20px 30px;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #EEE;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.hidden:hover {
+  opacity: 0.7;
+}
+
+nav * {
+  margin: 10px;
+}
+
+.slide {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+a#back {
+  position: absolute;
+  color: #555;
+  text-decoration: none;
+  font-size: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+a#back {
+  left: 0;
+}
+
+a#back div {
+  padding: 20px;
+  background: #DDD;
+}
