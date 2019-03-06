@@ -4,14 +4,34 @@ body {
 }
 
 main {
-  margin: 20px 30px;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   text-align: center;
+  z-index: -1;
+}
+
+main section {
+  margin: 20px 30px;
+}
+
+main a, nav a {
+  text-decoration: none;
+  color: inherit;
 }
 
 nav {
-  display: flex;
-  justify-content: space-between;
-  background-color: #EEE;
+  z-index: 100;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-weight: bold;
 }
 
 .hidden {
@@ -20,10 +40,6 @@ nav {
 
 .hidden:hover {
   opacity: 0.7;
-}
-
-nav * {
-  margin: 10px;
 }
 
 .slide {
@@ -58,4 +74,39 @@ a#back {
 a#back div {
   padding: 20px;
   background: #DDD;
+}
+
+main#intro {
+  z-index: -1;
+  background: url('/media/backgrounds/audience-auditorium-back-view-713149.jpg') center center / cover;
+}
+
+#intro .button {
+  padding: 20px 50px;
+  display: inline-block;
+  color: #555;
+}
+
+#intro .button a {
+  color: #555;
+  font-weight: bold;
+}
+
+div.white {
+  background-color: white;
+}
+
+#intro h1 {
+  color: white;
+  font-size: 3rem;
+}
+
+div.done {
+  background-color: rgba(180, 10, 20, 0.9);
+  color: white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: inline-block;
+  padding: 20px;
 }

@@ -5,7 +5,7 @@ from .models import get_next_image, get_image_at_index
 
 def home(request):
     if isinstance(request.user, AnonymousUser):
-        return render(request, 'not_logged_in.html')
+        return redirect('/login/')
     return render(request, 'index.html')
 
 
@@ -17,7 +17,7 @@ def slide(request):
     """
     if not request.user.is_authenticated:
         return redirect('/')
-    index = int(request.GET.get('index', 0))
+    index = int(request.GET.get('index', 1))
     if index <= 0:
         image = get_image_at_index(request.user, index)
     else:

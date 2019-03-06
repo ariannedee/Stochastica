@@ -2,7 +2,13 @@
 
 {% block title %}Stochastica{% endblock %}
 
+{% block main_id %}intro{% endblock %}
+
 {% block content %}
-<h1>Welcome  {{ user.name }}!</h1>
-<a href="{% url 'slide' %}">Start new game</a>
+<section>
+  <h1>Stochastica</h1>
+  <div class="button white">
+    <a href="{% url 'slide' %}">Start a game!</a>
+  </div>
+</section>
 {% endblock %}

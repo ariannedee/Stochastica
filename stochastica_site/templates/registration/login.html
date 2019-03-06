@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %}Stochastica - Login{% endblock %}
+{% block title %}Stochastica{% endblock %}
+
+{% block main_id %}intro{% endblock %}
 
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
+<section>
+  <h1>Stochastica</h1>
+  <div class="button white">
+    <h2>Log in to start playing</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</section>
 {% endblock %}

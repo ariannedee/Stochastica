@@ -9,14 +9,21 @@
 
 {% block nav_tag %}<nav class="hidden">{% endblock %}
 
+{% block main_id %}slide{% endblock %}
+
 {% block content %}
-<a id="next" href="{% url 'slide' %}?index={{ next }}">
-  <div class="slide" style='background-image: url("{{ image }}")'>
-  </div>
-</a>
-<a id="back" class="hidden" href="{% url 'slide' %}?index={{ prev }}">
-  <div>
-    <p><</p>
-  </div>
-</a>
+  <a id="next" href="{% url 'slide' %}?index={{ next }}">
+    <div class="slide" style='background-image: url("{{ image }}")'>
+    </div>
+  </a>
+  <a id="back" class="hidden" href="{% url 'slide' %}?index={{ prev }}">
+    <div>
+      <p><</p>
+    </div>
+  </a>
+  <a href="{% url 'index' %}">
+    <div class="done">
+      I'm done
+    </div>
+  </a>
 {% endblock %}
