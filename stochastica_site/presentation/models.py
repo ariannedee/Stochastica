@@ -49,6 +49,12 @@ class ImageView(models.Model):
         self.save()
 
 
+class Game(models.Model):
+    start_time = models.DateTimeField(auto_now_add=True)
+    end_time = models.DateTimeField(default=None, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
 def get_next_image(user):
     import random
     all_images = Image.objects.filter(pack__subscribers=user)

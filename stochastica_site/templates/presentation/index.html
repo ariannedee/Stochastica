@@ -3,6 +3,7 @@
 {% block title %}Stochastica - game{% endblock %}
 
 {% load i18n static %}
+
 {% block script %}
     <script src="{% static 'presentation/js/index.js' %}"></script>
 {% endblock %}
@@ -21,9 +22,15 @@
       <p><</p>
     </div>
   </a>
-  <a href="{% url 'index' %}">
+  <div class="timer">
+  </div>
+  <div class="time hidden">
+    {{ elapsed_time }}
+  </div>
+  <a href="{% url 'end_game' %}">
     <div class="done">
       I'm done
     </div>
   </a>
 {% endblock %}
+

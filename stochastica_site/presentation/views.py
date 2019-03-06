@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render, redirect
-from .models import get_next_image, get_image_at_index
+from django.utils.timezone import now
+
+from .models import get_next_image, get_image_at_index, Game
 
 
 def home(request):
@@ -17,7 +19,17 @@ def slide(request):
     """
     if not request.user.is_authenticated:
         return redirect('/')
-    index = int(request.GET.get('index', 1))
+    index = request.GET.get('index')
+    if index is not None:
+        index = int(index)
+        game = Game.objects.filter(user=request.user).order_by('-start_time').first()
+    else:
+        index = 1
+        game = Game(user=request.user)
+        game.save()
+
+    elapsed_time = now() - game.start_time
+    seconds = elapsed_time.seconds
     if index <= 0:
         image = get_image_at_index(request.user, index)
     else:
@@ -25,5 +37,15 @@ def slide(request):
     return render(request, 'presentation/index.html', context={
         'image': image.image.url,
         'next': min(1, index + 1),
-        'prev': min(-1, index - 1)
+        'prev': min(-1, index - 1),
+        'elapsed_time': seconds
     })
+
+
+def end_game(request):
+    if isinstance(request.user, AnonymousUser):
+        return redirect('/login/')
+    game = Game.objects.filter(user=request.user).order_by('-start_time').first()
+    game.end_time = now()
+    game.save()
+    return render(request, 'index.html')

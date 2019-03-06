@@ -110,3 +110,12 @@ div.done {
   display: inline-block;
   padding: 20px;
 }
+
+.timer {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #423593;
+  font-size: 2rem;
+  display: inline-block;
+}
