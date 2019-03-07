@@ -48,4 +48,4 @@ def end_game(request):
     game = Game.objects.filter(user=request.user).order_by('-start_time').first()
     game.end_time = now()
     game.save()
-    return render(request, 'index.html')
+    return redirect('/')
