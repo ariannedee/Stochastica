@@ -30,6 +30,8 @@ def slide(request):
 
     elapsed_time = now() - game.start_time
     seconds = elapsed_time.seconds
+    time_left = game.time_limit - seconds
+
     if index <= 0:
         image = get_image_at_index(request.user, index)
     else:
@@ -38,14 +40,19 @@ def slide(request):
         'image': image.image.url,
         'next': min(1, index + 1),
         'prev': min(-1, index - 1),
-        'elapsed_time': seconds
+        'elapsed_time': time_left
     })
 
 
-def end_game(request):
+def next_round(request):
     if isinstance(request.user, AnonymousUser):
         return redirect('/login/')
     game = Game.objects.filter(user=request.user).order_by('-start_time').first()
     game.end_time = now()
     game.save()
-    return redirect('/')
+    return render(request, 'presentation/next_round.html')
+
+def end_game(request):
+    if isinstance(request.user, AnonymousUser):
+        return redirect('/login/')
+    return render(request, 'index.html')

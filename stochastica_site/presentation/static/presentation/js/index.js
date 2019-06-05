@@ -18,7 +18,9 @@ $(document).ready(()=> {
   function setTime(seconds) {
     var mins = Math.floor(seconds / 60);
     var secs = Math.floor(seconds % 60);
-    if (secs < 10) {
+    if (seconds < 0) {
+      $('.timer').text(`0:00`);
+    } else if (secs < 10) {
       $('.timer').text(`${mins}:0${secs}`);
     } else {
       $('.timer').text(`${mins}:${secs}`);
@@ -27,11 +29,11 @@ $(document).ready(()=> {
 
   if (time[0]) {
     let seconds = parseInt(time.text());
-    seconds += 1;
+    seconds -= 1;
     setTime(seconds);
 
     setInterval(() => {
-      seconds += 1;
+      seconds -= 1;
       setTime(seconds);
     }, 1000);
   }

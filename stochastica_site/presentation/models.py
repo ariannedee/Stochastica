@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Q, Case, When, DateTimeField, F
+from django.db.models import Q, Case, When, DateTimeField, F, TimeField
+import datetime
 
 
 class Pack(models.Model):
@@ -52,6 +53,8 @@ class ImageView(models.Model):
 class Game(models.Model):
     start_time = models.DateTimeField(auto_now_add=True)
     end_time = models.DateTimeField(default=None, blank=True, null=True)
+    game_duration = models.TimeField(default=datetime.time(minute=2))
+    time_limit = models.IntegerField(default=120)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 

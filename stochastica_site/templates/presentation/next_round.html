@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Stochastica - Next Player!{% endblock %}
+
+{% block main_id %}intro{% endblock %}
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Next Player</title>
+</head>
+<body>
+    <section>
+      <h1>Stochastica</h1>
+      <a href="{% url 'slide' %}">
+        <div class="button white">
+          Next round!
+        </div>
+      </a>
+    </section>
+
+    <section>
+      <a href="{% url 'end_game' %}">
+        <div class="button white">
+          End the game :(
+        </div>
+      </a>
+    </section>
+
+</body>
+</html>
+
+{% endblock %}
