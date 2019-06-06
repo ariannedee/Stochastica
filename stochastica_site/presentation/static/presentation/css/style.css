@@ -56,7 +56,7 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: black;
+  background-color: white;
 }
 
 a#back {
@@ -109,6 +109,16 @@ main#intro {
   font-size: 3rem;
 }
 
+.timer {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  font-size: 5rem;
+  display: inline-block;
+}
+
 main#next_round {
   z_index: -1;
   background-color: black;
@@ -153,15 +163,6 @@ div.done {
   right: 0;
   display: inline-block;
   padding: 20px;
-}
-
-.timer {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  color: #FFFFFF;
-  font-size: 5rem;
-  display: inline-block;
 }
 
 footer {
