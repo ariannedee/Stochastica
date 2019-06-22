@@ -4,13 +4,20 @@ from django.utils.timezone import now
 
 from .models import get_next_image, get_image_at_index, Game
 
+from string import ascii_uppercase
+from random import choices
+
 
 def home(request):
     if isinstance(request.user, AnonymousUser):
         return redirect('/login/')
-    return render(request, 'index.html')
 
-def slide(request):
+    game_id = ''.join(choices(ascii_uppercase, k=5))
+    return render(request, 'index.html', context={
+        'game_id': game_id
+    })
+
+def slide(request, game_id):
     """
     index = 1   => get new random slide
     index = 0   => last viewed slide
@@ -39,21 +46,26 @@ def slide(request):
         'image': image.image.url,
         'next': min(1, index + 1),
         'prev': min(-1, index - 1),
-        'elapsed_time': time_left
+        'elapsed_time': time_left,
+        'game_id': game_id
     })
 
 def controller(request):
     return render(request, 'presentation/controller.html')
 
-def next_round(request):
+def next_round(request, game_id):
     if isinstance(request.user, AnonymousUser):
         return redirect('/login/')
     game = Game.objects.filter(user=request.user).order_by('-start_time').first()
     game.end_time = now()
     game.save()
-    return render(request, 'presentation/next_round.html')
+    return render(request, 'presentation/next_round.html', context={
+        'game_id': game_id
+    })
 
-def end_game(request):
+def end_game(request, game_id):
     if isinstance(request.user, AnonymousUser):
         return redirect('/login/')
-    return render(request, 'index.html')
+    return render(request, 'index.html', context={
+        'game_id': game_id
+    })

@@ -12,7 +12,8 @@
 </head>
 <section>
   <h1>Stochastica</h1>
-  <a href="{% url 'slide' %}">
+  <h2>Your game: {{ game_id }}</h2>
+  <a href="{% url 'slide' game_id %}">
     <div class="button white">
       Next round!
     </div>
@@ -20,7 +21,7 @@
 </section>
 
 <section>
-  <a href="{% url 'end_game' %}">
+  <a href="{% url 'end_game' game_id %}">
     <div class="button white">
       End the game :(
     </div>
