@@ -6,10 +6,10 @@
     <title>Game Controller</title>
 </head>
 <body style="height:100%">
-    <div id="slide_nav" style="background-color:grey; width:100%; height:60%">
+    <div id="slide_nav" style="background-color:grey; width:100%; height:60%; text-align: center; vertical-align: middle">
         <h1>Slide left or right to navigate</h1>
     </div>
-    <div id="end_game" style="background-color:blue; width:100%; height:40%">
+    <div id="end_game" style="background-color:grey; width:100%; height:40%; text-align: center; vertical-align: middle">
         <h1>Hold to end game</h1>
     </div>
 </body>
@@ -44,7 +44,10 @@
         document.getElementById("slide_nav").innerText = "swipeleft";
     });
     var hammertime = new Hammer(end_game);
-    hammertime.get('press').set({time:600});
+    hammertime.get('press').set({
+        time:300,
+        threshold:30
+    });
     hammertime.on('press', function(ev) {
         controllerSocket.send(JSON.stringify({
             'message': "end_game"
