@@ -8,9 +8,11 @@
 <body style="height:100%">
     <div id="slide_nav" style="background-color:grey; width:100%; height:60%; text-align: center; vertical-align: middle">
         <h1>Slide left or right to navigate</h1>
+        <div id="slide_msg"></div>
     </div>
     <div id="end_game" style="background-color:grey; width:100%; height:40%; text-align: center; vertical-align: middle">
         <h1>Hold to end game</h1>
+        <div id="end_game_msg"></div>
     </div>
 </body>
 <script>
@@ -34,14 +36,14 @@
             'message': "prev_slide"
         }));
         console.log("swiperight");
-        document.getElementById("slide_nav").innerText = "swiperight";
+        document.getElementById("slide_msg").innerText = "swiperight";
     });
     hammertime.on('swipeleft', function(ev) {
         controllerSocket.send(JSON.stringify({
             'message': "next_slide"
         }));
         console.log("swipeleft")
-        document.getElementById("slide_nav").innerText = "swipeleft";
+        document.getElementById("slide_msg").innerText = "swipeleft";
     });
     var hammertime = new Hammer(end_game);
     hammertime.get('press').set({
@@ -53,7 +55,7 @@
             'message': "end_game"
         }));
         console.log("press");
-        document.getElementById("end_game").innerText = "press";
+        document.getElementById("end_game_msg").innerText = "press";
     });
 
 
