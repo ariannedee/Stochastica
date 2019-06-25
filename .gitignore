@@ -2,3 +2,4 @@
 *.*~
 .idea
 /stochastica_site/static/
+*.sqlite3
