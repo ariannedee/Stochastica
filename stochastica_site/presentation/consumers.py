@@ -6,7 +6,8 @@ import json
 class ControllerConsumer(WebsocketConsumer):
     def connect(self):
         #self.room_name = self.scope['url_route']['kwargs']['room_name']
-        self.room_group_name = 'comm_%s' % 'controller'
+        game_id = self.scope['path_remaining'][:-1]
+        self.room_group_name = 'comm_%s' % game_id
 
         # Join room group
         async_to_sync(self.channel_layer.group_add)(
@@ -50,7 +51,8 @@ class ControllerConsumer(WebsocketConsumer):
 class SlideConsumer(WebsocketConsumer):
     def connect(self):
         #self.room_name = self.scope['url_route']['kwargs']['room_name']
-        self.room_group_name = 'comm_%s' % 'controller'
+        game_id = self.scope['path_remaining'][:-1]
+        self.room_group_name = 'comm_%s' % game_id
 
         # Join room group
         async_to_sync(self.channel_layer.group_add)(
