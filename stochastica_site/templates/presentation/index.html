@@ -11,7 +11,7 @@
 
         var controllerSocket = new WebSocket(
             'ws://' + window.location.host +
-            '/ws/play/controller/');
+            '/ws/play/{{ game_id }}/');
 
         var next = {{ next }}
         var prev = {{ prev }}
