@@ -10,7 +10,6 @@ def home(request):
         return redirect('/login/')
     return render(request, 'index.html')
 
-
 def slide(request):
     """
     index = 1   => get new random slide
@@ -43,6 +42,8 @@ def slide(request):
         'elapsed_time': time_left
     })
 
+def controller(request):
+    return render(request, 'presentation/controller.html')
 
 def next_round(request):
     if isinstance(request.user, AnonymousUser):

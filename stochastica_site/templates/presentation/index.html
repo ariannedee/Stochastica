@@ -5,7 +5,40 @@
 {% load i18n static %}
 
 {% block script %}
+
+
+    <script>
+
+        var controllerSocket = new WebSocket(
+            'ws://' + window.location.host +
+            '/ws/play/controller/');
+
+        var next = {{ next }}
+        var prev = {{ prev }}
+        var base_url = (window.location.href.split("?")[0])
+
+        controllerSocket.onmessage = function(e) {
+            var data = JSON.parse(e.data);
+            var message = data['message'];
+            if (message == "next_slide") {
+                window.location.href = (base_url + "?index=" + next)
+            } else if (message == "prev_slide") {
+                window.location.href = (base_url + "?index=" + prev)
+            } else if (message =="end_game") {
+                window.location.href = (base_url + "next_round")
+            } else if (message =="get_host") {
+                document.querySelector('#controller-log').value += (window.location.host + '\n')
+            };
+        };
+
+        controllerSocket.onclose = function(e) {
+            console.error('controller socket closed unexpectedly');
+        };
+
+    </script>
+
     <script src="{% static 'presentation/js/index.js' %}"></script>
+
 {% endblock %}
 
 {% block nav_class %}hidden hover{% endblock %}
