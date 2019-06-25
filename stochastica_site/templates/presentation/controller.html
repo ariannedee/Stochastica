@@ -4,16 +4,32 @@
 <head>
     <meta charset="utf-8"/>
     <title>Game Controller</title>
+    {% load i18n static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'presentation/css/style.css' %}">
+    <script src="{% static 'presentation/js/jquery-3.3.1.min.js' %}"></script>
 </head>
 <body style="height:100%">
-    <div id="slide_nav" style="background-color:grey; width:100%; height:60%; text-align: center; vertical-align: middle">
-        <h1>Slide left or right to navigate</h1>
-        <div id="slide_msg"></div>
-    </div>
-    <div id="end_game" style="background-color:grey; width:100%; height:40%; text-align: center; vertical-align: middle">
-        <h1>Hold to end game</h1>
-        <div id="end_game_msg"></div>
-    </div>
+    {% if game_id %}
+        <div id="slide_nav"
+             style="background-color:grey; width:100%; height:60%; text-align: center; vertical-align: middle">
+            <h1>Slide left or right to navigate</h1>
+            <div id="slide_msg"></div>
+        </div>
+        <div id="end_game"
+             style="background-color:grey; width:100%; height:40%; text-align: center; vertical-align: middle">
+            <h1>Hold to <span class="game-action">{{ game_action }}</span></h1>
+            <div id="end_game_msg"></div>
+        </div>
+    {% else %}
+    <form action="." method="POST">
+
+        {% csrf_token %}
+        <table>
+            {{form}}
+        </table>
+        <button type="submit">Join room</button>
+    </form>
+    {% endif %}
 </body>
 <script>
 
@@ -51,11 +67,18 @@
         threshold:30
     });
     hammertime.on('press', function(ev) {
-        controllerSocket.send(JSON.stringify({
-            'message': "end_game"
-        }));
-        console.log("press");
-        document.getElementById("end_game_msg").innerText = "press";
+        if ($('.game-action').text() === 'end game') {
+            controllerSocket.send(JSON.stringify({
+                'message': "end_game"
+            }));
+            $('.game-action').text('start game');
+        } else {
+            controllerSocket.send(JSON.stringify({
+                'message': "start_game"
+            }));
+            $('.game-action').text('end game');
+        }
+        $("#end_game_msg").innerText = "press";
     });
 
 

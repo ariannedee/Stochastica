@@ -1,6 +1,9 @@
+from random import choices
+from string import ascii_uppercase
+
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Q, Case, When, DateTimeField, F, TimeField
+from django.db.models import Case, When, DateTimeField, F
 import datetime
 
 
@@ -52,19 +55,21 @@ class ImageView(models.Model):
 
 class Game(models.Model):
     start_time = models.DateTimeField(auto_now_add=True)
+    round_start_time = models.DateTimeField(default=None, blank=True, null=True)
     end_time = models.DateTimeField(default=None, blank=True, null=True)
     game_duration = models.TimeField(default=datetime.time(minute=2))
     time_limit = models.IntegerField(default=120)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    game_id = models.CharField(max_length=5, unique=True)
 
 
-def get_next_image(user):
+def get_next_image(game):
     import random
-    all_images = Image.objects.filter(pack__subscribers=user)
+    all_images = Image.objects.filter(pack__subscribers=game.user)
     # Order by the last time this user saw this image, with unseen images at the top
     all_images = all_images.annotate(
         last_seen_at=Case(
-            When(views__user=user, then=F('views__viewed_at')),
+            When(views__user=game.user, then=F('views__viewed_at')),
             default=None,
             output_field=DateTimeField()
         )).order_by('last_seen_at')
@@ -72,16 +77,20 @@ def get_next_image(user):
     upper_limit = max(num_unseen_images, 20)
     upper_limit = min(upper_limit, all_images.count() - 1)  # In case there are < 20 images
     image = all_images[random.randint(0, upper_limit)]
-    image.view(user)
+    image.view(game.user)
     return image
 
 
 # Takes a negative or 0 index to get previously viewed images
-def get_image_at_index(user, index):
-    images = Image.objects.filter(pack__subscribers=user)
+def get_image_at_index(game, index):
+    images = Image.objects.filter(pack__subscribers=game.user)
     # Since QuerySets don't support negative indexing
     # we reverse the order and index by the absolute value
     images = images.order_by('-views__viewed_at').all()
     max_index = images.count() - 1
     image = images[min(abs(index), max_index)]
     return image
+
+
+def generate_game_id():
+    return ''.join(choices(ascii_uppercase, k=5))
