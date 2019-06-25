@@ -50,8 +50,10 @@ def slide(request, game_id):
         'game_id': game_id
     })
 
-def controller(request):
-    return render(request, 'presentation/controller.html')
+def controller(request, game_id):
+    return render(request, 'presentation/controller.html', context={
+        'game_id': game_id
+    })
 
 def next_round(request, game_id):
     if isinstance(request.user, AnonymousUser):
