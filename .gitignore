@@ -3,3 +3,4 @@
 .idea
 /stochastica_site/static/
 .DS_Store
+*.sqlite3

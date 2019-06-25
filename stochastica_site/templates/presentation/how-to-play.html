@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Stochastica - How to Play{% endblock %}
+
+{% block nav_class %}hidden hover{% endblock %}
+
+{% block main_id %}intro{% endblock %}
+
+{% block content %}
+<section>
+  <h1>How to Play</h1>
+  <br>
+  <div class="text white">
+  <p>
+    First you do this
+  </p>
+  <p>
+    Then this
+  </p>
+  </div>
+  <a href="{% url 'index' %}">
+    <div class="button white">
+      Back
+    </div>
+  </a>
+
+</section>
+{% endblock %}

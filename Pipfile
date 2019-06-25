@@ -8,6 +8,9 @@ sqlalchemy = "*"
 django = "==2.1.7"
 pillow = "*"
 urllib3 = "*"
+django-extensions = "*"
+channels = "*"
+channels-redis = "*"
 
 [dev-packages]
 django-extensions = "*"

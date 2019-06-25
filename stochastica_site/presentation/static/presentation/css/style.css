@@ -38,7 +38,7 @@ nav {
   opacity: 0;
 }
 
-.hidden:hover {
+.hidden.hover:hover {
   opacity: 0.7;
 }
 
@@ -56,6 +56,7 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  background-color: white;
 }
 
 a#back {
@@ -78,13 +79,16 @@ a#back div {
 
 main#intro {
   z-index: -1;
+  background-color: black;
   background: url('/media/backgrounds/audience-auditorium-back-view-713149.jpg') center center / cover;
 }
 
 #intro .button {
-  padding: 20px 50px;
+  padding: 15px 40px;
   display: inline-block;
   color: #555;
+  margin: 20px;
+  margin-bottom: 0;
 }
 
 #intro .button a {
@@ -92,13 +96,63 @@ main#intro {
   font-weight: bold;
 }
 
-div.white {
-  background-color: white;
+#intro .text {
+  padding: 20px 50px;
+  color: #555;
+  margin: 20px 10%;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
 }
 
 #intro h1 {
   color: white;
   font-size: 3rem;
+}
+
+.timer {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  font-size: 5rem;
+  display: inline-block;
+}
+
+main#next_round {
+  z_index: -1;
+  background-color: black;
+  background: url('/media/backgrounds/stadium_applause_sml.jpg') center center / cover;
+}
+
+#next_round .button {
+  padding: 15px 40px;
+  display: inline-block;
+  color: #555;
+  margin: 20px;
+  margin-bottom: 0;
+}
+
+#next_round .button a {
+  color: #555;
+  font-weight: bold;
+}
+
+#next_round .text {
+  padding: 20px 50px;
+  color: #555;
+  margin: 20px 10%;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+}
+
+#next_round h1 {
+  color: white;
+  font-size: 3rem;
+}
+
+div.white {
+  background-color: white;
 }
 
 div.done {
@@ -111,11 +165,17 @@ div.done {
   padding: 20px;
 }
 
-.timer {
+footer {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  color: #423593;
-  font-size: 2rem;
-  display: inline-block;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+#intro footer .button {
+  padding: 12px 30px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #444;
 }
