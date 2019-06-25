@@ -7,9 +7,14 @@
 {% block content %}
 <section>
   <h1>Stochastica</h1>
-  <a href="{% url 'slide' %}">
+  <a href="{% url 'next_round' game_id %}">
     <div class="button white">
-      Start a game!
+      Start a new game!
+    </div>
+  </a>
+  <a href="{% url 'controller' %}">
+    <div class="button white">
+      Join as controller
     </div>
   </a>
 </section>

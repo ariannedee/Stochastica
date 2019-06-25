@@ -4,6 +4,32 @@
 
 {% block main_id %}next_round{% endblock %}
 
+{% block script %}
+<script>
+    var controllerSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/play/{{ game_id }}/');
+    var slide_url = "{% url 'slide' game_id %}";
+
+    controllerSocket.onmessage = function (e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        console.log(message);
+        if (message == "start_game") {
+            window.location.href = slide_url
+        } else if (message == "get_host") {
+            document.querySelector('#controller-log').value += (window.location.host + '\n')
+        };
+    };
+
+    controllerSocket.onclose = function (e) {
+        console.error('controller socket closed unexpectedly');
+    };
+
+</script>
+
+{% endblock %}
+
 {% block content %}
 
 <head>
@@ -12,7 +38,8 @@
 </head>
 <section>
   <h1>Stochastica</h1>
-  <a href="{% url 'slide' %}">
+  <h2>Your game: {{ game_id }}</h2>
+  <a href="{% url 'slide' game_id %}">
     <div class="button white">
       Next round!
     </div>
@@ -20,7 +47,7 @@
 </section>
 
 <section>
-  <a href="{% url 'end_game' %}">
+  <a href="{% url 'end_game' game_id %}">
     <div class="button white">
       End the game :(
     </div>

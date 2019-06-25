@@ -5,10 +5,10 @@ $(document).ready(()=> {
   $(document).keydown(function(event){
 
     var keycode = (event.keyCode ? event.keyCode : event.which);
-    if(keycode == LEFT_ARROW){
+    if(keycode === LEFT_ARROW){
       $('#back')[0].click();
     }
-    if(keycode == RIGHT_ARROW | keycode == SPACE){
+    if(keycode === RIGHT_ARROW || keycode === SPACE){
       $('#next')[0].click();
     }
   });
@@ -38,3 +38,4 @@ $(document).ready(()=> {
     }, 1000);
   }
 });
+

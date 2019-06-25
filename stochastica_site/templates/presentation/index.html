@@ -5,27 +5,26 @@
 {% load i18n static %}
 
 {% block script %}
-
-
     <script>
-
         var controllerSocket = new WebSocket(
             'ws://' + window.location.host +
-            '/ws/play/controller/');
+            '/ws/play/{{ game_id }}/');
 
-        var next = {{ next }}
-        var prev = {{ prev }}
-        var base_url = (window.location.href.split("?")[0])
+        var next = {{ next }};
+        var prev = {{ prev }};
+        var slide_url = "{% url 'slide' game_id %}";
+        var end_url = "{% url 'next_round' game_id %}";
 
         controllerSocket.onmessage = function(e) {
             var data = JSON.parse(e.data);
             var message = data['message'];
+            console.log(message);
             if (message == "next_slide") {
-                window.location.href = (base_url + "?index=" + next)
+                window.location.href = (slide_url + "?index=" + next)
             } else if (message == "prev_slide") {
-                window.location.href = (base_url + "?index=" + prev)
+                window.location.href = (slide_url + "?index=" + prev)
             } else if (message =="end_game") {
-                window.location.href = (base_url + "next_round")
+                window.location.href = end_url
             } else if (message =="get_host") {
                 document.querySelector('#controller-log').value += (window.location.host + '\n')
             };
@@ -46,11 +45,11 @@
 {% block main_id %}slide{% endblock %}
 
 {% block content %}
-  <a id="next" href="{% url 'slide' %}?index={{ next }}">
+  <a id="next" href="{% url 'slide' game_id %}?index={{ next }}">
     <div class="slide" style='background-image: url("{{ image }}")'>
     </div>
   </a>
-  <a id="back" class="hidden hover" href="{% url 'slide' %}?index={{ prev }}">
+  <a id="back" class="hidden hover" href="{% url 'slide' game_id %}?index={{ prev }}">
     <div>
       <p><</p>
     </div>
@@ -60,7 +59,7 @@
   <div class="time hidden">
     {{ elapsed_time }}
   </div>
-  <a href="{% url 'next_round' %}">
+  <a href="{% url 'next_round' game_id %}">
     <div class="done">
       I'm done
     </div>

@@ -109,6 +109,11 @@ main#intro {
   font-size: 3rem;
 }
 
+#intro h2 {
+  color: white;
+  font-size: 2rem;
+}
+
 .timer {
   position: absolute;
   top: 20px;
@@ -149,6 +154,11 @@ main#next_round {
 #next_round h1 {
   color: white;
   font-size: 3rem;
+}
+
+#next_round h2 {
+  color: white;
+  font-size: 2rem;
 }
 
 div.white {
