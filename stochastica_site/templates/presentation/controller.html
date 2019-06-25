@@ -31,11 +31,13 @@
     </form>
     {% endif %}
 </body>
+{% if game_id %}
+
 <script>
 
     var controllerSocket = new WebSocket(
         'ws://' + window.location.host +
-        '/ws/play/controller/');
+        '/ws/play/{{ game_id }}/controller/');
 
 
     controllerSocket.onclose = function(e) {
@@ -83,5 +85,6 @@
 
 
 </script>
+{% endif %}
 
 </html>
