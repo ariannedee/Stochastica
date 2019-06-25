@@ -35,9 +35,9 @@
 
 <script>
 
-    var controllerSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/play/{{ game_id }}/controller/');
+        var controllerSocket = new WebSocket(
+            'ws://' + window.location.host +
+            '/ws/play/{{ game_id }}/');
 
 
     controllerSocket.onclose = function(e) {
